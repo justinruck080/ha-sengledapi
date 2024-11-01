@@ -13,7 +13,7 @@ from . import DOMAIN
 from .sengledapi.sengledapi import SengledApi
 
 _LOGGER = logging.getLogger(__name__)
-ATTRIBUTION = "Data provided by Sengled"
+ATTRIBUTION = "When Changing Brightness Don't move slider Too Fast To 100% Or It'll Fail To Update (wompy womp)"
 
 
 async def async_setup_platform(hass, config, add_entities, discovery_info=None):
