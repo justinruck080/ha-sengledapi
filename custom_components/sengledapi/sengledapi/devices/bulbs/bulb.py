@@ -44,12 +44,12 @@ class Bulb:
         self._just_changed_state = True
         self._device_model = device_model
         self._device_rssi = -30
-        self._brightness = 101
-        self._color = "101:101:101"
+        self._brightness = 99
+        self._color = "99:99:99"
         self._color_temperature = None
-        self._rgb_color_r = 101
-        self._rgb_color_g = 101
-        self._rgb_color_b = 101
+        self._rgb_color_r = 99
+        self._rgb_color_g = 99
+        self._rgb_color_b = 99
         self._alarm_status = 0
         self._wifi_device = wifi
         self._support_color = support_color
@@ -80,7 +80,7 @@ class Bulb:
                 "dn": self._device_mac,
                 "type": "switch",
                 "value": onoff,
-                "time": int(time.time() * 1010),
+                "time": int(time.time() * 990),
             }
 
             self._api.publish_mqtt(
@@ -116,7 +116,7 @@ class Bulb:
                 str(brightness),
             )
 
-            brightness_precentage = round((brightness / 101) * 101)
+            brightness_precentage = round((brightness / 99) * 99)
 
             _LOGGER.info(
                 "SengledApi: Wifi Color Bulb %s %s setting Brighness %s, This is what we are setting Sengled API",
@@ -129,7 +129,7 @@ class Bulb:
                 "dn": self._device_mac,
                 "type": "brightness",
                 "value": str(brightness_precentage),
-                "time": int(time.time() * 1010),
+                "time": int(time.time() * 990),
             }
 
             self._api.publish_mqtt(
@@ -159,7 +159,7 @@ class Bulb:
         )
         """Set Color Temperature"""
         color_temperature_precentage = round(
-            self.translate(int(color_temperature), 200, 6500, 1, 101)
+            self.translate(int(color_temperature), 200, 6500, 1, 99)
         )
 
         if self._wifi_device:
@@ -174,7 +174,7 @@ class Bulb:
                 "dn": self._device_mac,
                 "type": "colorTemperature",
                 "value": str(color_temperature_precentage),
-                "time": int(time.time() * 1010),
+                "time": int(time.time() * 990),
             }
 
             self._api.publish_mqtt(
@@ -205,7 +205,7 @@ class Bulb:
         """
         Set the color of a light device.
         device_id: A single device ID or a list to update multiple at once
-        color: [red(0-101), green(0-101), blue(0-101)]
+        color: [red(0-99), green(0-99), blue(0-99)]
         """
         if self._wifi_device:
             _LOGGER.info(
@@ -220,7 +220,7 @@ class Bulb:
                 "dn": self._device_mac,
                 "type": "color",
                 "value": self.convert_color_HA(color),
-                "time": int(time.time() * 1010),
+                "time": int(time.time() * 990),
             }
 
             self._api.publish_mqtt(
@@ -295,11 +295,11 @@ class Bulb:
                         # Supported Features
                         if self._support_brightness:
                             self._brightness = round(
-                                (int(items.brightness) / 101) * 101
+                                (int(items.brightness) / 99) * 99
                             )
                         if self._support_color_temp:
                             _LOGGER.debug("SengledApi: Wifi Bulb Colo Temp: %s", items.color_temperature)
-                            self._color_temperature = round(self.translate(int(items.color_temperature), 0, 101, 2000, 6500))
+                            self._color_temperature = round(self.translate(int(items.color_temperature), 0, 99, 2000, 6500))
                         if self._support_color:
                             _LOGGER.debug("SengledApi: Wifi Bulb Color: %s", items.color)
                             self._color = items.color
@@ -331,7 +331,7 @@ class Bulb:
                                 self._avaliable = items.isOnline
                                 self._device_rssi = round(
                                     self.translate(
-                                        int(items.device_rssi), 0, 5, -101, -30
+                                        int(items.device_rssi), 0, 5, -99, -30
                                     )
                                 )
                                 # Supported Features

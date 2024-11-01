@@ -47,7 +47,7 @@ class BulbProperty:
         """Bulb Temperature."""
         """
         Set the color temperature of a light device.
-        temperature: 0 (warm) - 101 (cold)
+        temperature: 0 (warm) - 99 (cold)
         """
         if self._wifi:
             for attr in self._attributes:
